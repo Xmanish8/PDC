@@ -8,21 +8,6 @@
 # Experiment No. 1
 # Key Status Applet Program
 
-## Aim
-Write a program to demonstrate status of keys on an Applet window such as KeyPressed, KeyReleased, KeyTyped.
-
----
-
-# STEP 1: Open CMD
-
-Press:
-
-Windows + R → type cmd → Enter
-
----
-
-# STEP 2: Go to Working Folder
-
 ```bash
 cd C:\Users\Dell\Downloads
 ```
@@ -105,11 +90,7 @@ Paste:
 
 ---
 
-# STEP 6: Delete Old Class File
 
-```bash
-del KeyStatusApplet.class
-```
 
 ---
 
@@ -226,6 +207,116 @@ java MouseEventDemo
 
 ---
 
+# Experiment No. 3
+# Student Marks GUI
+
+## File
+
+```text
+StudentMarksEntry.java
+```
+
+```java
+import java.awt.*;
+import java.awt.event.*;
+
+class StudentMarksEntry extends Frame implements ActionListener {
+
+    TextField[] marksFields;
+    Button submit;
+    Label resultLabel;
+
+    public StudentMarksEntry() {
+
+        setLayout(new GridLayout(6, 2));
+
+        setTitle("Student Marks Entry");
+
+        setSize(400, 300);
+
+        marksFields = new TextField[5];
+
+        for (int i = 0; i < 5; i++) {
+
+            add(new Label("Subject " + (i + 1) + " Marks: "));
+
+            marksFields[i] = new TextField(10);
+
+            add(marksFields[i]);
+        }
+
+        submit = new Button("Submit");
+
+        submit.addActionListener(this);
+
+        add(submit);
+
+        resultLabel = new Label("");
+
+        add(resultLabel);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+        int total = 0;
+
+        for (TextField field : marksFields) {
+
+            total += Integer.parseInt(field.getText());
+        }
+
+        float percentage = total / 5.0f;
+
+        new ResultWindow(percentage);
+    }
+
+    class ResultWindow extends Frame {
+
+        public ResultWindow(float percentage) {
+
+            setLayout(new FlowLayout());
+
+            setTitle("Result");
+
+            setSize(250, 120);
+
+            add(new Label("Percentage: " + percentage + "%"));
+
+            setVisible(true);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        new StudentMarksEntry();
+    }
+}
+```
+---
+
+## Step-by-step run
+
+1. Save StudentMarksEntry.java in your folder.
+
+2. Open CMD in that folder.
+
+3. Compile:
+
+```bash
+javac StudentMarksEntry.java
+```
+
+4. Run:
+
+```bash
+java StudentMarksEntry
+```
+
+---
+
+---
 
 # Experiment No. 5
 # RMI Palindrome Program
@@ -389,6 +480,101 @@ java rmiclient
 ```text
 Palindrome
 ```
+
+
+
+---
+
+
+# Experiment No. 6
+# InetAddress Example
+
+## File
+
+```text
+InetAddressExample.java
+```
+
+---
+
+## Working code
+
+```java
+import java.net.*;
+
+public class InetAddressExample {
+
+    public static void main(String[] args) {
+
+        try {
+
+            InetAddress localHost = InetAddress.getLocalHost();
+
+            System.out.println("Local Host Name: " + localHost.getHostName());
+
+            System.out.println("Local Host IP: " + localHost.getHostAddress());
+
+            InetAddress google = InetAddress.getByName("www.google.com");
+
+            System.out.println("\nGoogle Host Name: " + google.getHostName());
+
+            System.out.println("Google IP Address: " + google.getHostAddress());
+
+            InetAddress[] addresses = InetAddress.getAllByName("www.microsoft.com");
+
+            System.out.println("\nAll IP addresses for www.microsoft.com:");
+
+            for (InetAddress addr : addresses) {
+
+                System.out.println(addr);
+            }
+
+        } catch (UnknownHostException e) {
+
+            System.out.println("Host not found: " + e.getMessage());
+        }
+    }
+}
+```
+
+---
+
+## Step-by-step run
+
+1. Open CMD.
+
+2. Go to your folder:
+
+```bash
+cd C:\Users\Dell\Downloads
+```
+
+3. Compile:
+
+```bash
+javac InetAddressExample.java
+```
+
+4. Run:
+
+```bash
+java InetAddressExample
+```
+
+---
+
+## Expected output
+
+- Local host name
+- Local host IP
+- Google host name and IP
+- All IPs of Microsoft
+
+---
+
+## Important note
+
+Internet connection should be available, otherwise UnknownHostException may occur.
 
 
 
@@ -821,3 +1007,4 @@ http://localhost:8080/CalculatorApp/index.html
 ---
 
 # END OF AJP EXPERIMENT TUTORIALS
+
